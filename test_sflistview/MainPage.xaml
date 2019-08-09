@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:vm="clr-namespace:test_sflistview"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             Title="{Binding Title}"
+             BackgroundColor="#eee"
+             x:Class="test_sflistview.MainPage">
+
+    <StackLayout VerticalOptions="FillAndExpand">
+
+        <Frame MinimumHeightRequest="150">
+            <Label FontSize="Title"
+                   Text="{Binding Title}"
+                   VerticalOptions="Center" />
+        </Frame>
+
+        <Grid VerticalOptions="FillAndExpand">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <SearchBar x:Name="filterText"
+                       HeightRequest="40"
+                       Keyboard="Text"
+                       IsSpellCheckEnabled="False"
+                       Placeholder="Member name or suburb"
+                       TextChanged="OnFilterTextChanged"
+                       Grid.Row="0" />
+
+            <syncfusion:SfListView x:Name="lvMembers"
+                                   BackgroundColor="#eee"
+                                   FocusBorderThickness="0"
+                                   Grid.Row="1"
+                                   GroupHeaderSize="40"
+                                   IsStickyGroupHeader="False"
+                                   ItemSize="75"
+                                   SelectionBackgroundColor="#fcb913"
+                                   VerticalOptions="FillAndExpand">
+
+                <syncfusion:SfListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout BackgroundColor="#eee"
+                                             HorizontalOptions="FillAndExpand">
+                                    <Label BackgroundColor="Transparent"
+                                           FontSize="22"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="FillAndExpand"
+                                           Margin="15,10,0,0"
+                                           Text="{Binding Key}"
+                                           VerticalTextAlignment="Center" />
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </syncfusion:SfListView.GroupHeaderTemplate>
+
+                <syncfusion:SfListView.Behaviors>
+                    <vm:SfListViewGroupingBehavior />
+                </syncfusion:SfListView.Behaviors>
+
+
+                <syncfusion:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout BackgroundColor="#fff"
+                                             Margin="0,0,0,1"
+                                             VerticalOptions="FillAndExpand">
+                                    <Label FontSize="18"
+                                           LineBreakMode="TailTruncation"
+                                           Margin="10,15,5,0"
+                                           Text="{Binding Owner}"
+                                           TextColor="#444"
+                                           VerticalTextAlignment="Center" />
+                                    <Label FontSize="Small"
+                                           LineBreakMode="TailTruncation"
+                                           Margin="10,5,0,20"
+                                           Text="{Binding Address}"
+                                           TextColor="#bbb" />
+                                </StackLayout>
+
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </syncfusion:SfListView.ItemTemplate>
+
+            </syncfusion:SfListView>
+
+        </Grid>
+
+    </StackLayout>
+
+
+
+</ContentPage>
